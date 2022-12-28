@@ -11,7 +11,6 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 from pathlib import Path
-import django_heroku
 import cloudinary
 import cloudinary.uploader
 import cloudinary.api
@@ -30,7 +29,9 @@ SECRET_KEY = 'django-insecure-ov#r^^&xv&^0vmc(zj&h_t^$*52@8jicn=%*z*@s-=li!s_p@=
 DEBUG = True
 
 ALLOWED_HOSTS = ['*']
-CORS_ALLOW_ALL_ORIGINS = True
+X_FRAME_OPTIONS = '*'
+CORS_ORIGIN_ALLOW_ALL = True
+CSRF_TRUSTED_ORIGINS = ['http://127.0.0.1:8000/']
 
 
 # Application definition
@@ -89,27 +90,27 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
 # Heroku Database
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'd3glul1sgh1dt',
-        'USER': 'otpousllytqeob',
-        'PORT': 5432,
-        'HOST': 'ec2-34-235-198-25.compute-1.amazonaws.com',
-        'PASSWORD': '4d11527ee507dea42f4d54e24b9c02fbd07ac4e7cfee8b2357b0280c7f4cd722',
-    }
-}
-
-# Local Database
 # DATABASES = {
 #     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'd3glul1sgh1dt',
+#         'USER': 'otpousllytqeob',
+#         'PORT': 5432,
+#         'HOST': 'ec2-34-235-198-25.compute-1.amazonaws.com',
+#         'PASSWORD': '4d11527ee507dea42f4d54e24b9c02fbd07ac4e7cfee8b2357b0280c7f4cd722',
 #     }
 # }
 
+# Local Database
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
+}
+
 # Heroku PostgreSQL Database
-django_heroku.settings(locals())
+#django_heroku.settings(locals())
 
 
 # Password validation
